@@ -1,0 +1,16 @@
+language: node_js
+before_script:
+  - npm install -g gatsby-cli
+node_js:
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - source # build master branch only
+deploy:
+  provider: script
+  script: yarn install && yarn run deploy # generate static files
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  on:
+    branch: master
