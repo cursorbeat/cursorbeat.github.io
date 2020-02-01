@@ -1,6 +1,6 @@
 language: node_js
 before_script:
-  - npm install -g gatsby-cli
+  - yarn add global gatsby-cli
 node_js:
   - '13' # use nodejs v10 LTS
 cache: yarn
