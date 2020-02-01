@@ -53,7 +53,7 @@ const Index = props => {
                 target="_blank"
                 href={facebookURL}
                 rel="noopener"
-                aria-label="Jacob's Facebook page"
+                aria-label="Adrian's Facebook page"
               >
                 <Facebook />
               </a>
@@ -73,7 +73,7 @@ const Index = props => {
                 target="_blank"
                 href={snapchat}
                 rel="noopener"
-                aria-label="jacob's snapchat account"
+                aria-label="Adrian's snapchat account"
               >
                 <Snapchat />
               </a>

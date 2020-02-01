@@ -45,8 +45,7 @@ const Head = ({ seo }) => {
   return (
     <Helmet>
       <title>
-        {seo.title && `${seo.title} | `}Jacob D. Castro - Fullstack Javascript
-        Developer
+        {seo.title && `${seo.title} | `} CursorBeat
       </title>
       <meta name="Description" content={seo.description} />
       <meta name="description" content={seo.description} />
