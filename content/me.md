@@ -14,7 +14,7 @@ githubURL: "https://github.com/adrian-grimm"
 linkedinURL: "https://www.linkedin.com/in/adrian-grimm"
 ---
 
-# About Me
+# About
 
-My name is Adrian Grimm. I am a Software-Developer. 
+My name is Adrian Grimm. I am a Software-Developer and this is my project CursorBeat.
 ...tbc...

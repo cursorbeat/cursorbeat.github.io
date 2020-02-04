@@ -1,10 +1,10 @@
 ---
-slug: "windows-subsystem-for-linux"
-title: "Windows Subsystem for Linux"
-subtitle: "Tilix and Zsh in Windows 10"
+slug: "Tilix-and-Zsh-on-Windows10"
+title: "Tilix and Zsh on Windows 10"
+subtitle: "Windows Subsystem for Linux"
 image: "Tilix.jpeg"
 imageTitle: "Tilix"
-imageAlt: "Tilix with Zsh running in WSL on Windows 10."
+imageAlt: "Tilix with Zsh running on WSL on Windows 10."
 date: "2020-02-01T00:00:00-07:00"
 tags:
   - "windows"
@@ -13,19 +13,19 @@ tags:
 type:  "blogPost"
 ---
 
-I like all major Operating-Systems for different reasons and tasks. But for me there is only one solution for a good shell: "Zsh". The [Z-shell](http://zsh.sourceforge.net) is for me the right mix of a stable, extendable, modern and universal shell. On MacOS it's already the new default shell and on Linux it's easy to install. On Windows it's also no problem, but to get it working with same smooth expirience like on Linux or MacOs I use some tools chained together. 
+I like all major Operating-Systems for different reasons and tasks. But for me there is only one solution for a good shell: "Zsh". The [Z-shell](http://zsh.sourceforge.net) is for me the right mix of a stable, extendable, modern and universal shell. On MacOS it's already the new default shell and on Linux it's easy to install. On Windows it's also no problem, but to get it working with same smooth expirience like on Linux or MacOS I use some tools chained together.
 
 To be clear: Yes, Microsoft has a mighty PowerShell, CMD and Git-Bash is also available for Windows. But in my humble opinion nothing nothing beats a zsh with the power of linux/unix commandline tools.
 
 ## WSL Tuning
 
-The [Windows Subsystem for Linux](https://docs.microsoft.com/de-de/windows/wsl/about) is a great Feature that came with Windows 10. I think every DevOp who is working with more than only Microsoft based Operating-Systems should get firm with it. 
+The [Windows Subsystem for Linux](https://docs.microsoft.com/de-de/windows/wsl/about) is a great Feature that came with Windows 10. I think every DevOp who is working with more than only Microsoft based Operating-Systems should get firm with it.
 
 If you run WSL the first decission is which Linux distribution you want to run. All the big ones are available (Ubuntu, Debian, Fedora, etc.). My choice was [Pengwin](https://www.whitewaterfoundry.com) - it's based on Debian, but it's customised for the use with WSL.
 
 I installed ZSH and [OhMyZSH](https://ohmyz.sh) together with a bunch of plugins to achieve a faster input expirience and a better visualization of context.
 
-Visualization and UI/UX in general could be a pain on a terminal. Not every terminal is capeable to render the shell output as it intendet to be or handle all keyboard and mouse input right - and yes mouse input support could be great with TMux, NVim, EMacs or other commandline tools. In my case I like to use [Nerd Fonts](https://www.nerdfonts.com) and a special shell promt that relies on the usage of PowerLine, Lingatures and other font features like icons etc. 
+Visualization and UI/UX in general could be a pain on a terminal. Not every terminal is capeable to render the shell output as it intendet to be or handle all keyboard and mouse input right - and yes mouse input support could be great with TMux, NVim, EMacs or other commandline tools. In my case I like to use [Nerd Fonts](https://www.nerdfonts.com) and a special shell promt that relies on the usage of PowerLine, Lingatures and other font features like icons etc.
 
 ## Tilix
 
@@ -37,11 +37,11 @@ The next best terminal running on Windows IMHO is [Terminus](https://eugeny.gith
 
 The good thing is that it is possible to run Tilix on Windows through WSL and it's not as tricky as it sounds like. You only need the X11 stack and a X Server for Windows. This sounds like a lot of overhead but it realy isn't the case.
 
-As X Window System[(X11)](https://de.wikipedia.org/wiki/X_Window_System) I can highly recomend [X410](https://token2shell.com/x410/) from Choung Networks - it's a fast reliable light weight implementation of X11 for Windows 10. 
+As X Window System[(X11)](https://de.wikipedia.org/wiki/X_Window_System) I can highly recomend [X410](https://token2shell.com/x410/) from Choung Networks - it's a fast reliable light weight implementation of X11 for Windows 10.
 
 I use a little trick to hide a default terminal session window in the background with [TMux](https://github.com/tmux/tmux/wiki) to only show up Tilix. To achive this you only need a link in Windows with this command:
 
- `C:\Windows\System32\wsl.exe -d WLinux -- tmux -c "zsh ~/Tilix_WSL-Launcher.zsh"` 
+ `C:\Windows\System32\wsl.exe -d WLinux -- tmux -c "zsh ~/Tilix_WSL-Launcher.zsh"`
 
 And in the WSL instance (here WLinux) you only need to place this [shell script](https://raw.githubusercontent.com/Adrian-Grimm/DotFiles/master/Tilix_WSL-Launcher.zsh) which will start X410 and Tilix in Windows with no visible startup console:
 
@@ -59,5 +59,3 @@ Search for a nice icon for the Windows link assigned in the properties of it and
 I use this solution [since a couple of month](https://twitter.com/AdiGrimm/status/1154045308856258561) and I did't got any issue at all with it. No Bugs no performance issue. Most of the time I'm using Git, [SpaceVim](https://spacevim.org)/[NeoVim](https://neovim.io), [TMux](https://github.com/tmux/tmux/wiki), SSH and other tools - and I'm happy with it (maybe I write another blog post about that but you can get some inspiration from [this awesome collection](https://github.com/herrbischoff/awesome-command-line-apps)).
 
 If you like to use my setup feel free to copy my [DotFiles repository on GitHub](https://github.com/Adrian-Grimm/DotFiles) - but don't blame me for some more dirty hacks in there :wink:. You can also clone it with [YADM](https://yadm.io) - a DotFiles Manager I could recoment.
-
-

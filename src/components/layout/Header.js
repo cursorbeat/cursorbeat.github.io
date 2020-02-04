@@ -63,7 +63,7 @@ const Header = () => {
             </li>
             <li>
               <Link activeClassName="activePage" to="/about">
-                About Me
+                About
               </Link>
             </li>
           </ul>

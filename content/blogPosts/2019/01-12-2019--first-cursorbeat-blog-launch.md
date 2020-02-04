@@ -5,7 +5,7 @@ subtitle: "Blog is online."
 image: "Rocket.png"
 imageTitle: "Rocket"
 imageAlt: "Rocket flying to the up left."
-date: "2019-11-01T00:00:00-07:00"
+date: "2019-12-01T00:00:00-07:00"
 tags:
   - "deployment"
   - "blog"

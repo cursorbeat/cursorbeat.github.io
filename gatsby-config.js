@@ -74,6 +74,14 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+        }`,
         plugins: [
           {
             resolve: `gatsby-remark-prismjs`,
@@ -110,9 +118,23 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://blog.cursorbeat.dev',
-        sitemap: 'https://blog.cursorbeat.dev/sitemap.xml',
-        policy: [{ userAgent: '*', allow: '/' }],
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+        }`,
+        serialize: ({ query: { site, allMarkdownRemark } }) => {
+          return allMarkdownRemark.edges.map(edge => {
+            return Object.assign({}, edge.node.frontmatter, {
+              host: site.siteMetadata.siteUrl,
+              sitemap: site.siteMetadata.siteUrl + '/sitemap.xml',
+              policy: [{ userAgent: '*', allow: '/' }],
+            })
+          })
+        }        
       },
     },
     `gatsby-plugin-sitemap`,
@@ -156,33 +178,39 @@ module.exports = {
     {
       resolve: `gatsby-plugin-feed`,
       options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title
-                description
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
+            serialize: ({ query: { site, allSitePage, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map(edge => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  url: `${site.siteMetadata.siteUrl}/${edge.node.frontmatter.type == 'blogPost' ? 'blog' : 'tutorials'}/${edge.node.frontmatter.slug}`,
+                  guid: `${site.siteMetadata.siteUrl}/${edge.node.frontmatter.type == 'blogPost' ? 'blog' : 'tutorials'}/${edge.node.frontmatter.slug}`,
                   custom_elements: [{ "content:encoded": edge.node.html }],
                 })
               })
             },
             query: `
               {
+                site {
+                  siteMetadata {
+                    title
+                    description
+                    siteUrl
+                    site_url: siteUrl
+                  }
+                }
+                allSitePage(filter: {context: {slug: {ne: null}}}) {
+                  edges {
+                    node {
+                      path
+                      context {
+                        slug
+                      }
+                    }
+                  }
+                }
                 allMarkdownRemark(
                   filter: { frontmatter: { type: { in: ["blogPost","tutorial"] } } }
                   sort: { fields: [frontmatter___date], order: DESC }
@@ -195,10 +223,12 @@ module.exports = {
                       frontmatter {
                         title
                         date
+                        slug 
+                        type
                       }
                     }
                   }
-                }
+                }        
               }
             `,
             output: "/rss.xml",
