@@ -2,7 +2,7 @@
 slug: "Tilix-and-Zsh-on-Windows10"
 title: "Tilix and Zsh on Windows 10"
 subtitle: "Windows Subsystem for Linux"
-image: "Tilix.jpeg"
+image: "Tilix.png"
 imageTitle: "Tilix"
 imageAlt: "Tilix with Zsh running on WSL on Windows 10."
 date: "2020-02-01T00:00:00-07:00"
