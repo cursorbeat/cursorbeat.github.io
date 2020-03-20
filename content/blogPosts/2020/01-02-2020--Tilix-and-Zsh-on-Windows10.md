@@ -15,7 +15,7 @@ tags:
 type:  "blogPost"
 ---
 
-I like all major Operating-Systems for different reasons and tasks. But for me there is only one perfect shell: "Zsh". The [Z-shell](http://zsh.sourceforge.net) is for me the right mix of a stable, extendable, modern and universal shell. On MacOS it's already the new default shell and on Linux it's easy to install. On Windows it's also no problem, but to get it working with same smooth expirience like on Linux or MacOS I use some tools chained together.
+I like all major Operating-Systems for different reasons and tasks. But for me there is only one perfect shell: "Zsh". The [Z-shell](http://zsh.sourceforge.net) is for me the right mix of a stable, extendable, modern and universal shell. On MacOS it's already the new default shell and on Linux it's easy to install. On Windows it's also no problem, but to get it working with same smooth expirience like on Linux or MacOS, I use some tools chained together.
 
 To be clear: Yes, Microsoft has a mighty PowerShell, CMD and Git-Bash is also available for Windows. But in my humble opinion - nothing beats a zsh with the power of linux/unix commandline tool repository.
 
@@ -23,7 +23,7 @@ To be clear: Yes, Microsoft has a mighty PowerShell, CMD and Git-Bash is also av
 
 The [Windows Subsystem for Linux](https://docs.microsoft.com/de-de/windows/wsl/about) is a great Feature that came with Windows 10. I think every DevOp who is working with more than only Microsoft based Operating-Systems should get firm with it.
 
-If you run WSL the first decission is which Linux distribution you want to run. All the big ones are available (Ubuntu, Debian, Fedora, etc.). My choice was [Pengwin](https://www.whitewaterfoundry.com) - it's based on Debian, but it's customised for the use with WSL.
+If you run WSL, the first decission is which Linux distribution you want to run. All the big ones are available (Ubuntu, Debian, Fedora, etc.). My choice was [Pengwin](https://www.whitewaterfoundry.com) - it's based on Debian, but it's customised for the use with WSL.
 
 I installed ZSH and [OhMyZSH](https://ohmyz.sh) together with a bunch of plugins to achieve a faster input expirience and a better visualization of context.
 
