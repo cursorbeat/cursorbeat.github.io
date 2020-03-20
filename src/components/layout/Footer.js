@@ -105,7 +105,7 @@ const Footer = ({ path }) => {
           })}
         </ul>
       </div>
-      <span><a href={`/sitemap.xml`}>Sitemap</a> | <a href={`/impressum`}>Impressum</a></span>
+      <span><a href={`/rss.xml`}>RSS-Feed</a> | <a href={`/sitemap.xml`}>Sitemap</a> | <a href={`/impressum`}>Impressum</a></span>
     </FooterWrapper>
   );
 };
