@@ -10,6 +10,8 @@ tags:
   - "windows"
   - "wsl"
   - "zsh"
+  - "terminal"
+  - "shell"
 type:  "blogPost"
 ---
 
