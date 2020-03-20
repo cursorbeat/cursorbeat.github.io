@@ -43,7 +43,7 @@ There is also a upcomming [second "Oh-My-Posh"](http://pecigonzalo.github.io/Oh-
 ### PowerShell $Profile config
 
 To create use `PowerShell`New-Item -path $Profile -type file –force``.  
-You can edit your profile config with e.g. `notepad $PROFILE`.
+You can edit your profile config with e.g. `nano $PROFILE`.
 
 ```PowerShell
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
