@@ -12,7 +12,6 @@ install:
 cache:
   yarn: true
   directories:
-    - node_modules
     - .yarn
 
 before_script:
