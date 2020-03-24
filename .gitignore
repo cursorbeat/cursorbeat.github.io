@@ -10,7 +10,13 @@ node_modules/
 /build
 /public
 
-# misc
+# yarn
+.pnp.js
+.yarn/build-state.yml
+.yarn/cache/
+.yarn/install-state.gz
+
+#misc
 .cache
 /.vscode/
 .DS_Store
