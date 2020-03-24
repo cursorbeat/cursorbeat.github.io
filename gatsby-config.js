@@ -134,7 +134,7 @@ module.exports = {
               policy: [{ userAgent: '*', allow: '/' }],
             })
           })
-        }        
+        }
       },
     },
     `gatsby-plugin-sitemap`,
@@ -153,7 +153,7 @@ module.exports = {
                 siteUrl
               }
             }
-  
+
             allSitePage {
               edges {
                 node {
@@ -223,12 +223,12 @@ module.exports = {
                       frontmatter {
                         title
                         date
-                        slug 
+                        slug
                         type
                       }
                     }
                   }
-                }        
+                }
               }
             `,
             output: "/rss.xml",
