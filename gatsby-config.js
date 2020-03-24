@@ -232,7 +232,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "CursorBeat RSS Feed",
+            title: "CursorBeat",
           },
         ],
       },
