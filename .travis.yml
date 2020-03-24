@@ -3,7 +3,6 @@ before_script:
   - yarn add global gatsby-cli
 node_js:
   - '13' # use nodejs v10 LTS
-cache: yarn
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
