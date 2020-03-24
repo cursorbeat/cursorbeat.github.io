@@ -59,7 +59,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "deploy": "gatsby build && gh-pages -d public -b master -r https://$GH_TOKEN@github.com/cursorbeat/cursorbeat.github.io.git",
+    "deploy": "gatsby build && gh-pages -d public -b master -r https://${GH_TOKEN}@github.com/cursorbeat/cursorbeat.github.io.git",
     "build": "gatsby build",
     "debug": "gatsby develop",
     "format": "prettier --write '**/*.js'",
