@@ -6,8 +6,14 @@ node_js:
 before_install:
   - npm install -g yarn
 
+install:
+  - yarn install
+
 cache:
   yarn: true
+  directories:
+    - node_modules
+    - .yarn
 
 before_script:
   - yarn add global gatsby-cli
