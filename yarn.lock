@@ -10702,7 +10702,7 @@ fsevents@~2.1.2:
   bin:
     gh-pages: bin/gh-pages.js
     gh-pages-clean: bin/gh-pages-clean.js
-  checksum: f8e5273fd437af276c917527ae81d33246e075e78dcac09ba298f9ceb309e8c09c4beb58da5248e1eae553945c5455980e9429814d74c9e5c76b8be28a7b8cdd
+  checksum: 67ad82ebfaf4f71cb569d65f8beb900760df5ab6f2c0568ecf641517e30257b659db897ceef5479d0d4cee02e2368eed138ed543863a0cb842c2730dad33da5b
   languageName: node
   linkType: hard
 

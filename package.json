@@ -2,7 +2,7 @@
   "name": "cursorbeat-dev-blog",
   "private": true,
   "description": "The CursorBeat Blog",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "author": "Adrian Grimm",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
