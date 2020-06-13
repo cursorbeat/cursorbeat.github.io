@@ -1,8 +1,10 @@
 import React from 'react';
 import Layout from './layout';
 import { Link, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 import Moment from 'react-moment';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import BlogAuthor from '../components/blog/BlogAuthor';
 import BlogPostPageWrapper from '../styles/blog/BlogPostStyles';
 const path = require(`path`);
@@ -10,7 +12,8 @@ const path = require(`path`);
 
 // TODO add next and previous post links
 
-const blogPost = ({data}) => {
+const blogPost = props => {
+  const { path, data } = props;
   const {
     type,
     title,
@@ -21,7 +24,7 @@ const blogPost = ({data}) => {
     imageAlt,
     date,
     tags,
-  } = data.markdownRemark.frontmatter;
+  } = data.mdx.frontmatter;
 
   // ? set SEO meta data depending on post type
   let seo;
@@ -29,10 +32,10 @@ const blogPost = ({data}) => {
     seo = {
       page: `${type}`,
       title: `${title}`,
-      description: data.markdownRemark.excerpt,
+      description: data.mdx.excerpt,
       url: `https://blog.cursorbeat.dev/${slug}`,
       imgUrl: data.file.publicURL,
-      imgAlt: data.markdownRemark.frontmatter.imageAlt,
+      imgAlt: imageAlt,
       breadcrumbs: [
         {
           name: `Blog`,
@@ -48,10 +51,10 @@ const blogPost = ({data}) => {
     seo = {
       page: `${type}`,
       title: `${title}`,
-      description: data.markdownRemark.excerpt,
+      description: data.mdx.excerpt,
       url: `https://blog.cursorbeat.dev/${slug}`,
       imgUrl: data.file.publicURL,
-      imgAlt: data.markdownRemark.frontmatter.imageAlt,
+      imgAlt: imageAlt,
       breadcrumbs: [
         {
           name: `Tutorials`,
@@ -74,14 +77,14 @@ const blogPost = ({data}) => {
           Published: <Moment date={date} format="MMM DD, YYYY" />
         </p>
 
-        {data.markdownRemark.timeToRead &&
+        {data.mdx.timeToRead &&
           (type === 'tutorial' ? (
             <p>
-              Approx. {data.markdownRemark.timeToRead + 5} minutes to
+              Approx. {data.mdx.timeToRead + 5} minutes to
               complete
             </p>
           ) : (
-            <p>{data.markdownRemark.timeToRead} minute read</p>
+            <p>{data.mdx.timeToRead} minute read</p>
           ))}
 
         <BlogAuthor />
@@ -96,9 +99,9 @@ const blogPost = ({data}) => {
           title={imageTitle}
         />
 
-        <article
-          dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }}
-        />
+        <div className="articelBody">
+          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+        </div>
 
         <div className="closing">
           <h3>- CursorBeat.dev Blog</h3>
@@ -108,21 +111,25 @@ const blogPost = ({data}) => {
   );
 };
 
+blogPost.propTypes = {
+  path: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
 export default blogPost;
 
 export const BLOG_POST_QUERY = graphql`
-  query BlogPostQuery($slug: String!, $imgRegEx: String) {
-    markdownRemark(frontmatter: { slug: { eq: $slug } }) {
+  query BLOG_POST_QUERY($slug: String!, $imgRegEx: String) {
+    mdx(frontmatter: { slug: { eq: $slug } }) {
       id
-      html
       excerpt(pruneLength: 370)
+      body
       timeToRead
       frontmatter {
         type
         title
         slug
         subtitle
-        image
         imageTitle
         imageAlt
         date

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../utils/ThemeContext';
+import { ThemeContext } from '../../utils';
 import lightbulbIcon from '../../images/lightbulb.svg';
 
 const ThemeToggleBtn = () => {

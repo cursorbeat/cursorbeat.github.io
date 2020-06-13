@@ -3,8 +3,8 @@ const path = require('path');
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage, reject } = actions;
   const blogRes = await graphql(`
-    {
-      allMarkdownRemark(
+    query BLOG_POST_PAGES_QUERY {
+      allMdx(
         filter: { frontmatter: { type: { eq: "blogPost" } } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
@@ -27,7 +27,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const blogPostTemplate = path.resolve('./src/templates/blogPost.js');
 
-  blogRes.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  await blogRes.data.allMdx.edges.forEach(({ node }) => {
     createPage({
       path: `blog/${node.frontmatter.slug}`,
       component: blogPostTemplate,
@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const tutorialRes = await graphql(`
     {
-      allMarkdownRemark(
+      allMdx(
         filter: { frontmatter: { type: { eq: "tutorial" } } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
@@ -69,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // reuse blogPostTemplate from above
   // const blogPostTemplate = path.resolve('./src/templates/blogPost.js');
 
-  tutorialRes.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  tutorialRes.data.allMdx.edges.forEach(({ node }) => {
     createPage({
       path: `tutorials/${node.frontmatter.slug}`,
       component: blogPostTemplate,
@@ -89,12 +89,15 @@ exports.createPages = async ({ graphql, actions }) => {
 const { createFilePath } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode })
+    //const parent = getNode(node.parent);
     createNodeField({
       name: `slug`,
       node,
       value,
+      //value: `/${parent.sourceInstanceName}/${parent.name}`,
     })
   }
-}
+};
+

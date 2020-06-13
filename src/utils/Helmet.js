@@ -1,19 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 const Head = ({ seo }) => {
   const data = useStaticQuery(graphql`
     query HELMET_QUERY {
-      file(relativePath: { eq: "me.md" }) {
-        childMarkdownRemark {
+      me: file(relativePath: { eq: "me.md" }) {
+        childMdx {
           frontmatter {
             miniBio
             email
             phone
             url
             handle
-            username
             twitterURL
             linkedinURL
           }
@@ -25,13 +25,12 @@ const Head = ({ seo }) => {
   const {
     miniBio,
     email,
-    phone,
     url,
     handle,
     username,
     twitterURL,
     linkedinURL,
-  } = data.file.childMarkdownRemark.frontmatter;
+  } = data.me.childMdx.frontmatter;
 
   const breadcrumbs = seo.breadcrumbs.map((item, index) => {
     return {
@@ -118,6 +117,10 @@ const Head = ({ seo }) => {
 
     </Helmet>
   );
+};
+
+Head.propTypes = {
+  seo: PropTypes.object.isRequired,
 };
 
 export default Head;

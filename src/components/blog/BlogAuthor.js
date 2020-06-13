@@ -5,8 +5,8 @@ import Img from 'gatsby-image';
 const BlogAuthor = () => {
   const myData = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "me.md" }) {
-        childMarkdownRemark {
+      me: file(relativePath: { eq: "me.md" }) {
+        childMdx {
           id
           frontmatter {
             name
@@ -37,7 +37,7 @@ const BlogAuthor = () => {
     portrait,
     email,
     handle,
-  } = myData.file.childMarkdownRemark.frontmatter;
+  } = myData.me.childMdx.frontmatter;
 
   return (
     <div className="author">

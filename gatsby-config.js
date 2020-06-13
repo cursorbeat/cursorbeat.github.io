@@ -13,6 +13,49 @@ module.exports = {
 
   plugins: [
     {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        extensions: ['.mdx', '.md'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 800,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: null,
+              aliases: {},
+              showLineNumbers: false,
+              noInlineHighlight: false,
+              languageExtensions: [
+                {
+                  language: 'superscript',
+                  extend: 'javascript',
+                  definition: {
+                    superscript_types: /(SuperType)/,
+                  },
+                  insertBefore: {
+                    function: {
+                      superscript_keywords: /(superif|superelse)/,
+                    },
+                  },
+                },
+              ],
+              prompt: {
+                user: 'root',
+                host: 'localhost',
+                global: false,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `CursorBeat.dev Blog`,
@@ -22,16 +65,12 @@ module.exports = {
         theme_color: `#353535`,
         display: `standalone`,
         lang: `en`,
-        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
+        icon: path.join(__dirname, 'src', 'images', 'favicon.png'),
       },
     },
-    {
-      resolve: `gatsby-plugin-styled-components`,
-      options: {
-        // Add any options here
-      },
-    },
+    `gatsby-plugin-styled-components`,
     `gatsby-transformer-sharp`,
+    'gatsby-remark-images',
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -66,53 +105,15 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        pathToConfigModule: path.join(__dirname, `src`, `utils`, `typography`),
+        path: path.join(__dirname, 'content'),
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-typography`,
       options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-        }`,
-        plugins: [
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: 'language-',
-              inlineCodeMarker: null,
-              aliases: {},
-              showLineNumbers: false,
-              noInlineHighlight: false,
-              languageExtensions: [
-                {
-                  language: 'superscript',
-                  extend: 'javascript',
-                  definition: {
-                    superscript_types: /(SuperType)/,
-                  },
-                  insertBefore: {
-                    function: {
-                      superscript_keywords: /(superif|superelse)/,
-                    },
-                  },
-                },
-              ],
-              prompt: {
-                user: 'root',
-                host: 'localhost',
-                global: false,
-              },
-            },
-          },
-        ],
+        pathToConfigModule: path.join(__dirname, `src`, `utils`, `typography`),
       },
     },
     {
@@ -126,8 +127,8 @@ module.exports = {
               }
             }
         }`,
-        serialize: ({ query: { site, allMarkdownRemark } }) => {
-          return allMarkdownRemark.edges.map(edge => {
+        serialize: ({ query: { site, allMdx } }) => {
+          return allMdx.edges.map(edge => {
             return Object.assign({}, edge.node.frontmatter, {
               host: site.siteMetadata.siteUrl,
               sitemap: site.siteMetadata.siteUrl + '/sitemap.xml',
@@ -174,14 +175,25 @@ module.exports = {
       },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-offline`,
-    `gatsby-plugin-lodash`,
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: `gatsby-plugin-feed-mdx`,
       options: {
+        query: `
+              {
+                site {
+                  siteMetadata {
+                    title
+                    description
+                    siteUrl
+                    site_url: siteUrl
+                  }
+                }
+              }
+        `,
         feeds: [
           {
-            serialize: ({ query: { site, allSitePage, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
@@ -193,25 +205,7 @@ module.exports = {
             },
             query: `
               {
-                site {
-                  siteMetadata {
-                    title
-                    description
-                    siteUrl
-                    site_url: siteUrl
-                  }
-                }
-                allSitePage(filter: {context: {slug: {ne: null}}}) {
-                  edges {
-                    node {
-                      path
-                      context {
-                        slug
-                      }
-                    }
-                  }
-                }
-                allMarkdownRemark(
+                allMdx(
                   filter: { frontmatter: { type: { in: ["blogPost","tutorial"] } } }
                   sort: { fields: [frontmatter___date], order: DESC }
                 ) {
@@ -233,6 +227,18 @@ module.exports = {
             `,
             output: "/rss.xml",
             title: "CursorBeat",
+            description: `Blog of CursorBeat.dev`,
+            feedUrl: `https://blog.cursorbeat.dev/rss.xml`,
+            language: `en-en`,
+            copyright: `Copyright © 2020 Cursurbeat`,
+            authorName: `Adrian Grimm`,
+            ownerName: `Adrian Grimm`,
+            ownerEmail: `cursorbeat@adrian-grimm.net`,
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            ////match: "^/blog/"
           },
         ],
       },

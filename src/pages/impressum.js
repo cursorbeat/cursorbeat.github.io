@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import Layout from '../templates/layout';
 import { DefaultPageWrapper } from '../styles/pages/DefaultStyles';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-const Impressum = props => {
+const Impressum = ({ path, data }) => {
   const seo = {
     page: `impressum`,
     title: 'Impressum CursorBeat',
-    description: `${props.data.me.childMarkdownRemark.excerpt}`,
+    description: `${data.me.childMdx.excerpt}`,
     url: `https://blog.cursorbeat.dev/impressum`,
-    imgUrl: `${props.data.pageImg.publicURL}`,
+    imgUrl: `${data.pageImg.publicURL}`,
     imgAlt: `cursorbeat logo, twitter, github icons with @cursorbeat username`,
     breadcrumbs: [
       {
@@ -20,22 +22,25 @@ const Impressum = props => {
   };
 
   return (
-    <Layout seo={seo} path={props.path}>
-      <DefaultPageWrapper
-        dangerouslySetInnerHTML={{
-          __html: props.data.me.childMarkdownRemark.html,
-        }}
-      />
+    <Layout seo={seo} path={path}>
+      <DefaultPageWrapper>
+        <MDXRenderer>{data.me.childMdx.body}</MDXRenderer>
+      </DefaultPageWrapper>
     </Layout>
   );
 };
+
+Impressum.propTypes = {
+  path: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+}
 
 export default Impressum;
 
 export const Impressum_PAGE_QUERY = graphql`
   query Impressum_PAGE_QUERY {
     me: file(relativePath: { eq: "impressum.md" }) {
-      childMarkdownRemark {
+      childMdx {
         id
         excerpt(pruneLength: 370)
         frontmatter {
@@ -49,7 +54,7 @@ export const Impressum_PAGE_QUERY = graphql`
             tags
             type
         }
-        html
+        body 
       }
     }
 

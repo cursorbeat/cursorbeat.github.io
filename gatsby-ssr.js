@@ -1,7 +1,13 @@
 import React from 'react';
 import ThemeContextWrapper from './src/utils/ThemeContext';
+import FilterContextWrapper from './src/utils/FiltersContext';
+import { MDXProvider } from '@mdx-js/react';
 
-// provide theme state to entire app
+// provide contexts to entire app
 export const wrapRootElement = ({ element }) => (
-  <ThemeContextWrapper>{element}</ThemeContextWrapper>
+  <ThemeContextWrapper>
+    <FilterContextWrapper>
+      <MDXProvider>{element}</MDXProvider>
+    </FilterContextWrapper>
+  </ThemeContextWrapper>
 );

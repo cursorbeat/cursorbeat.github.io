@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Moment from 'react-moment';
+import PropTypes from 'prop-types';
 import BlogListWrapper from '../../styles/index/BlogListingStyles';
 import RightArrow from '../../images/svg/RightArrowSVG';
 
@@ -25,24 +26,29 @@ const BlogListing = ({ data }) => {
           {frontmatter.type === 'tutorial' && '[Tutorial]: '}
           {frontmatter.title}
         </h2>
+        <h5>
+          {frontmatter.subtitle}
+        </h5>
+        <p className="publishDate">
+          Published: <Moment date={frontmatter.date} format="MMMM DD, YYYY" />
+        </p>
+        <p>{excerpt}</p>
         <ul>
           {frontmatter.tags &&
             frontmatter.tags.map((tag, i) => (
               <li className="listingTag" key={i}>
-                <h5>{tag}</h5>
+                <span>{tag}</span>
               </li>
             ))}
         </ul>
-        <h3>
-          Published: <Moment date={frontmatter.date} format="MMMM DD, YYYY" />
-        </h3>
-        <p>{excerpt}</p>
+        <div className="timeToRead">
         {data.timeToRead &&
           (frontmatter.type === 'tutorial' ? (
-            <h4>Approx. {data.timeToRead + 5} minutes to complete</h4>
+            <span>Approx. {data.timeToRead + 5} minutes to complete</span>
           ) : (
-            <h4>{data.timeToRead} minute read</h4>
+            <span>{data.timeToRead} minute read</span>
           ))}
+        </div>
         <div className="readMore">
           <p>Read More</p>
           <RightArrow />
@@ -50,6 +56,10 @@ const BlogListing = ({ data }) => {
       </Link>
     </BlogListWrapper>
   );
+};
+
+BlogListing.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default BlogListing;

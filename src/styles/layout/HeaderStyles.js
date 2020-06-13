@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lightTheme } from '../../styles/layout/__themes';
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -8,9 +9,13 @@ const HeaderWrapper = styled.header`
   width: 100vw;
   height: 70px;
   background-color: ${props => props.theme.bgColor};
+  background: ${props => { return props.theme.bgColor; }};
   transition: background-color ${props => props.theme.transition},
-    box-shadow 0.3s;
-  box-shadow: ${props => (props.isScrolled ? '0px 0px 10px #4d4d4d' : 'none')};
+    background ${props => props.theme.transition}, box-shadow 0.3s;
+  box-shadow: ${props =>
+    props.isScrolled && props.theme.bgColor === lightTheme.bgColor
+      ? '0px 0px 10px #4d4d4d'
+      : '0px 0px 10px #0d0d0d'};
   display: flex;
   justify-content: center;
 

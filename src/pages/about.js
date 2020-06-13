@@ -1,15 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import Layout from '../templates/layout';
 import { DefaultPageWrapper } from '../styles/pages/DefaultStyles';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-const About = props => {
+const About = ({ path, data }) => {
   const seo = {
     page: `about`,
     title: 'About CursorBeat',
-    description: `${props.data.me.childMarkdownRemark.excerpt}`,
+    description: `${data.me.childMdx.excerpt}`,
     url: `https://blog.cursorbeat.dev/about`,
-    imgUrl: `${props.data.pageImg.publicURL}`,
+    imgUrl: `${data.pageImg.publicURL}`,
     imgAlt: `cursorbeat logo, twitter, github icons with @cursorbeat username`,
     breadcrumbs: [
       {
@@ -20,22 +22,25 @@ const About = props => {
   };
 
   return (
-    <Layout seo={seo} path={props.path}>
-      <DefaultPageWrapper
-        dangerouslySetInnerHTML={{
-          __html: props.data.me.childMarkdownRemark.html,
-        }}
-      />
+    <Layout seo={seo} path={path}>
+      <DefaultPageWrapper>
+        <MDXRenderer>{data.me.childMdx.body}</MDXRenderer>
+      </DefaultPageWrapper>
     </Layout>
   );
 };
+
+About.propTypes = {
+  path: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+}
 
 export default About;
 
 export const ABOUT_PAGE_QUERY = graphql`
   query ABOUT_PAGE_QUERY {
     me: file(relativePath: { eq: "me.md" }) {
-      childMarkdownRemark {
+      childMdx {
         id
         excerpt(pruneLength: 370)
         frontmatter {
@@ -52,7 +57,7 @@ export const ABOUT_PAGE_QUERY = graphql`
           githubURL
           linkedinURL
         }
-        html
+        body
       }
     }
 

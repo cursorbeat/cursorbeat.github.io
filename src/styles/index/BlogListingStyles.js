@@ -18,6 +18,9 @@ const BlogListWrapper = styled.div`
     font-weight: 300;
     margin: 8px 0 15px;
   }
+  h5 {
+    margin: 8px 0 15px;
+  }
 
   ul {
     list-style-type: none;
@@ -36,14 +39,31 @@ const BlogListWrapper = styled.div`
     margin-bottom: 11px;
   }
 
+  p.publishDate {
+      font-size: 1rem;
+      font-weight: 300;
+      margin: 8px 0 15px;
+  }
+
+  .timeToRead {
+    span {
+      font-size: 1rem;
+      font-weight: 900;
+      margin: 8px 0 15px;
+    }
+  }
+
   .readMore {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 108px;
-    height: 50px;
-    margin: -10px 0 15px;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 142px;
+    height: 37px;
+    margin: 10px 0 15px;
+    padding: 8px;
+    background-color: ${props => props.theme.accentColor};
+    transition: 0.3s;
 
     ul {
       .listingTag {
@@ -59,6 +79,7 @@ const BlogListWrapper = styled.div`
     }
 
     p {
+      background-color: rgba(0, 0, 0, 0);
       margin: 0;
       color: ${props => props.theme.textColor};
     }
@@ -74,6 +95,9 @@ const BlogListWrapper = styled.div`
   &:hover {
     .rightArrow {
       transform: translateX(8px);
+    }
+    .readMore {
+      box-shadow: 0 3px 9px #4d4d4d;
     }
   }
 `;

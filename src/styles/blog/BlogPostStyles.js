@@ -26,6 +26,7 @@ const BlogPostPageWrapper = styled.div`
       max-height:380px;
       width: auto !important;
       height: auto !important;
+      border: 0 !important;
     }
   }
 
@@ -52,6 +53,12 @@ const BlogPostPageWrapper = styled.div`
     p {
       font-size: 0.9rem;
       max-width: 680px;
+    }
+  }
+  
+  .articelBody{
+    img {
+      border: 5px solid black;
     }
   }
 

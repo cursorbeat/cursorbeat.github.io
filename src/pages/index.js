@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import Layout from '../templates/layout';
 import { IndexPageWrapper } from '../styles/index/IndexStyles';
 import BlogListing from '../components/index/BlogListing';
@@ -10,27 +11,27 @@ import Linkedin from '../images/svg/LinkedinSVG';
 import Github from '../images/svg/GithubSVG';
 import Arrow from '../images/svg/DownArrowSVG';
 
-const Index = props => {
+const Index = ({ path, data }) => {
   const {
     miniBio,
     twitterURL,
     githubURL,
     linkedinURL,
-  } = props.data.me.childMarkdownRemark.frontmatter;
+  } = data.me.childMdx.frontmatter;
 
   const seo = {
     page: `index`,
     title: '',
     description:`${miniBio}`,
     url: `https://blog.cursorbeat.dev/`,
-    imgUrl: `${props.data.pageImg.publicURL}`,
+    imgUrl: `${data.pageImg.publicURL}`,
     imgAlt:
       'cursorbeat logo, twitter, github icons with @cursorbeat username',
     breadcrumbs: [],
   };
 
   return (
-    <Layout seo={seo} path={props.path}>
+    <Layout seo={seo} path={path}>
       <IndexPageWrapper>
         <div className="indexIntro">
           <h1>
@@ -42,7 +43,7 @@ const Index = props => {
               <a
                 target="_blank"
                 href={twitterURL}
-                rel="noopener"
+                rel="noreferrer"
                 aria-label="Adrian Grimm's twitter profile"
               >
                 <Twitter />
@@ -52,7 +53,7 @@ const Index = props => {
               <a
                 target="_blank"
                 href={facebookURL}
-                rel="noopener"
+                rel="noreferrer"
                 aria-label="Adrian's Facebook page"
               >
                 <Facebook />
@@ -62,27 +63,17 @@ const Index = props => {
               <a
                 target="_blank"
                 href={linkedinURL}
-                rel="noopener"
+                rel="noreferrer"
                 aria-label="Adrian Grimm's linkedin profile"
               >
                 <Linkedin />
               </a>
             </li>
-            {/* <li>
-              <a
-                target="_blank"
-                href={snapchat}
-                rel="noopener"
-                aria-label="Adrian's snapchat account"
-              >
-                <Snapchat />
-              </a>
-            </li> */}
             <li>
               <a
                 target="_blank"
                 href={githubURL}
-                rel="noopener"
+                rel="noreferrer"
                 aria-label="Cursorbeat's Github page"
               >
                 <Github />
@@ -105,7 +96,7 @@ const Index = props => {
         <div id="recentPublications">
           <h1>All Recent Publications</h1>
 
-          {props.data.allMarkdownRemark.edges.map(({ node }) => (
+          {data.allMdx.edges.map(({ node }) => (
             <BlogListing key={node.id} data={node} />
           ))}
         </div>
@@ -114,12 +105,17 @@ const Index = props => {
   );
 };
 
+Index.propTypes = {
+  path: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+};
+
 export default Index;
 
 export const INDEX_POSTS_QUERY = graphql`
   query INDEX_POSTS_QUERY {
     # all blog posts, sorted by most recent
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: frontmatter___date, order: DESC }
       filter: { frontmatter: { type: { in: ["blogPost", "tutorial"] } } }
     ) {
@@ -142,7 +138,7 @@ export const INDEX_POSTS_QUERY = graphql`
 
     # social links from about markdown file
     me: file(relativePath: { eq: "me.md" }) {
-      childMarkdownRemark {
+      childMdx {
         id
         frontmatter {
           email

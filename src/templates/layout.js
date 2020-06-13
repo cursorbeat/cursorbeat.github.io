@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { ThemeContext } from '../utils/ThemeContext';
+import { ThemeContext } from '../utils';
 import { ThemeProvider } from 'styled-components';
 import Head from '../utils/Helmet';
+import PropTypes from 'prop-types';
 
 import { LayoutWrapper } from '../styles/layout/LayoutStyles';
 import Header from '../components/layout/Header';
@@ -48,6 +49,12 @@ const Layout = ({ children, seo, path }) => {
       </LayoutWrapper>
     </ThemeProvider>
   );
+};
+
+Layout.propTypes = {
+  path: PropTypes.string.isRequired,
+  children: PropTypes.object.isRequired,
+  seo: PropTypes.object.isRequired,
 };
 
 export default Layout;
