@@ -5,15 +5,15 @@ subtitle: "The question of compromise (IMHO)"
 image: "Keyboard.jpg"
 imageTitle: "Keyboard"
 imageAlt: "Part of a Keyboard - detail to Keys."
-date: "2020-06-13T10:00:00+0200"
+date: "2020-06-12T10:00:00+0200"
 tags:
   - "Keyboard"
 type:  "blogPost"
 ---
 
-## My Keyboard recommendations
-
 I type at least ~70h on different Keyboards every week and in the last years I had used over 25 different ones. In this post I want to share my favorits for each situation and some tipps.
+
+## My Keyboard recommendations
 
 ### 1. _„HomeOffice“:_
 
@@ -35,7 +35,7 @@ I type at least ~70h on different Keyboards every week and in the last years I h
 
 > ➕ Custom key-mapping/Layer + non-print Keycaps (also for ISO-DE compatibility, or [DVORAK](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout))  
 > ➖ Mobility in terms of hight  
-> ➖ Missing keys - available on the second virtual layer
+> ➖ Missing keys - available on the second virtual layer  
 > ➖ Availability - until today you can only import it from Japan  
 > ⚠️ Perfect for advanced typists which like [VIM](https://neovim.io) 😜
 
@@ -50,7 +50,9 @@ I type at least ~70h on different Keyboards every week and in the last years I h
 > ➕ Hetrogenic OS support + wireless UEFI/BIOS capable dongles  
 > ➕ Well made rubber-dome keys with backlit  
 > ➖ Some strange Mappings & Prints ( Key after F12, <sub>€</sub>E<sub>€</sub> [ISO/DE]..)  
-> ➖ Batteries not changeable => Best silent Keyboard - like a swiss army knife
+> ➖ Batteries not changeable 
+
+=> Best silent Keyboard for the open-plan office - like a swiss army knife for every kind of tasks
 
 ### 4. _„Share/Spare/Couch“ :_
 

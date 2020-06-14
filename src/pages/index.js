@@ -148,6 +148,7 @@ export const INDEX_POSTS_QUERY = graphql`
           username
           githubURL
           linkedinURL
+          twitterURL
         }
       }
     }
