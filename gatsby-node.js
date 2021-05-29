@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: node.frontmatter.slug,
         // relative filepath for blogPost.js query
         imgUrl: `content/images/tutorials/${node.frontmatter.slug}/${node.frontmatter.image}`,
-        imgRegEx: `/.*(${node.frontmatter.slug}\\\\/${node.frontmatter.image})$/`,
+        imgRegEx: `/.*(${node.frontmatter.slug}/${node.frontmatter.image})$/`,
       },
     });
   });
@@ -101,3 +101,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+   resolve: {
+      fallback: {
+        path: require.resolve('path-browserify'),
+      },
+    },
+  })
+}

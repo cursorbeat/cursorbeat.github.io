@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 
 const BlogAuthor = () => {
   const myData = useStaticQuery(graphql`
@@ -23,9 +23,7 @@ const BlogAuthor = () => {
 
       portrait: file(relativePath: { eq: "portrait.png" }) {
         childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+          gatsbyImageData(layout: CONSTRAINED)
         }
       }
     }
@@ -42,8 +40,8 @@ const BlogAuthor = () => {
   return (
     <div className="author">
       <div className="portrait">
-        <Img
-          fluid={myData.portrait.childImageSharp.fluid}
+        <GatsbyImage
+          image={myData.portrait.childImageSharp.gatsbyImageData}
           title="Adrian Grimm"
           alt="photo of Adrian Grimm"
           style={{

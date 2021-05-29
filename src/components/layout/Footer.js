@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import FooterWrapper from '../../styles/layout/FooterStyles';
 
 import gatsbyImg from '../../images/tech-icons/Gatsby_Monogram.svg';
@@ -26,9 +26,7 @@ const Footer = ({ path }) => {
         relativePath: { eq: "tech-icons/styled-components.png" }
       ) {
         childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
+          gatsbyImageData(layout: CONSTRAINED, placeholder: TRACED_SVG)
         }
       }
     }
@@ -55,7 +53,7 @@ const Footer = ({ path }) => {
       alt: 'gatsbyjs logo',
     },
     {
-      img: data.styledImg.childImageSharp.fluid,
+      img: data.styledImg.childImageSharp.gatsbyImageData,
       url: 'https://www.styled-components.com/',
       title: 'styled-components',
       alt: 'nail painting emoji as styled components logo',
@@ -90,8 +88,8 @@ const Footer = ({ path }) => {
               <li key={i}>
                 <a href={url} target="_blank" rel="noopener" aria-label={title}>
                   {title === 'styled-components' ? (
-                    <Img
-                      fluid={img}
+                    <GatsbyImage
+                      image={img}
                       title={title}
                       alt={alt}
                       style={{ height: '32px', width: '32px' }}

@@ -2,7 +2,8 @@ import React from 'react';
 import Layout from './layout';
 import { Link, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import { getSrc } from "gatsby-plugin-image"
 import Moment from 'react-moment';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import BlogAuthor from '../components/blog/BlogAuthor';
@@ -19,7 +20,6 @@ const blogPost = props => {
     title,
     slug,
     subtitle,
-    image,
     imageTitle,
     imageAlt,
     date,
@@ -34,7 +34,7 @@ const blogPost = props => {
       title: `${title}`,
       description: data.mdx.excerpt,
       url: `https://blog.cursorbeat.dev/${slug}`,
-      imgUrl: data.file.publicURL,
+      imgUrl: getSrc(data.file),
       imgAlt: imageAlt,
       breadcrumbs: [
         {
@@ -53,7 +53,7 @@ const blogPost = props => {
       title: `${title}`,
       description: data.mdx.excerpt,
       url: `https://blog.cursorbeat.dev/${slug}`,
-      imgUrl: data.file.publicURL,
+      imgUrl: getSrc(data.file),
       imgAlt: imageAlt,
       breadcrumbs: [
         {
@@ -89,12 +89,12 @@ const blogPost = props => {
 
         <BlogAuthor />
 
-        <Img
+        <GatsbyImage
+          image={getImage(data.file)}
           className="mainpostimage"
           style={{
             marginBottom: '25px',
           }}
-          fluid={data.file.childImageSharp.fluid}
           alt={imageAlt}
           title={imageTitle}
         />
@@ -129,7 +129,7 @@ export const BLOG_POST_QUERY = graphql`
         type
         title
         slug
-        subtitle
+        subtitle    
         imageTitle
         imageAlt
         date
@@ -138,11 +138,8 @@ export const BLOG_POST_QUERY = graphql`
     }
 
     file(relativePath: { regex: $imgRegEx }) {
-      publicURL # used for SEO
       childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(layout: CONSTRAINED)
       }
     }
   }

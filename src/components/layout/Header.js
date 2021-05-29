@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import useScrollListener from '../../utils/useScrollListener';
 import { HeaderWrapper } from '../../styles/layout/HeaderStyles';
 import '../../styles/layout/hamburgers.css';
