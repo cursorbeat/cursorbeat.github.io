@@ -2,12 +2,12 @@
 slug: 'OpenWrt'
 title: 'Wifi with OpenWrt'
 subtitle: 'Banana Pi R3 as Wifi Access-Point'
-image: 'OpenWrt-Argon-Theme-Screenshot.png'
-imageTitle: 'Placeholder'
-imageAlt: 'OpenWrt screenshot of the main page UI with Argon Theme'
+image: 'OpenWrt-Argon-Login.jpeg'
+imageTitle: 'OpenWrt Login'
+imageAlt: 'OpenWrt Argon Theme login screen'
 repo: ''
 liveLink: ''
-date: '2023-10-23T01:00:00-07:00'
+date: '2023-10-24T00:00:00-07:00'
 tags:
   - OpenWrt
   - Wifi
@@ -30,7 +30,7 @@ A powerful ARM CPU, 2GB RAM, 8GB MMC storage and 2SFP slots give a lot of room f
 
 If you want to wait [Banana Pi R4](https://wiki.banana-pi.org/Banana_Pi_BPI-R4) is also getting around next year - Wifi-7, 4GB RAM, 10Gbit SFP+, USB Power.
 
-![BananaPiR3 look inside](../Images/tutorials/OpenWrt/BananaPiR3-look-inside.jpeg "BananaPiR3 look inside")
+![BananaPiR3 look inside](./BananaPiR3-look-inside.jpeg "BananaPiR3 look inside")
 
 ## Set-UP
 
@@ -96,6 +96,8 @@ Background: /dev/mmcblk0p66 is inside of /dev/mmcblk0p5.
 ### OpenWrt The Argon Theme
 
 The [Argon theme](https://github.com/jerrykuku/luci-theme-argon) is the most beautiful looking one available atm of writing.
+
+![OpenWrt Argon Theme](./OpenWrt-Argon-Theme-Screenshot.png "OpenWrt screenshot of the main page UI with Argon Theme")
 
 For OpenWrt 23.05 you can just install it with those commands:
 

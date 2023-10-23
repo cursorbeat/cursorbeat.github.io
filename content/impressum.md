@@ -20,10 +20,6 @@ type: "page"
 
 Information in accordance with Section 5 TMG:
 
-Adrian Grimm,  
-Ludwigstr. 2,  
-63263 Neu-Isenburg
-
 **Contact Information:**
 
 E-Mail: cursorbeat-blog@adrian-grimm.net  
