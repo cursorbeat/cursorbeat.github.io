@@ -28,9 +28,9 @@ Clearly one of the best Wifi OpenWrt solutions on the market is the self-build s
 The Wifi power of this devices covers even professional requirements with 4x4 5ghz and 2.4ghz.
 A powerful ARM CPU, 2GB RAM, 8GB MMC storage and 2SFP slots give a lot of room for a wide range of use-cases.
 
-If you want to wait [Banana Pi R4](https://wiki.banana-pi.org/Banana_Pi_BPI-R4) is also getting around next year - Wifi-7, 4GB RAM, 10Gbit SFP+, USB Power.
-
 ![BananaPiR3 look inside](./BananaPiR3-look-inside.jpeg "BananaPiR3 look inside")
+
+If you want to wait [Banana Pi R4](https://wiki.banana-pi.org/Banana_Pi_BPI-R4) is also getting around next year - Wifi-7, 4GB RAM, 10Gbit SFP+, USB Power.
 
 ## Set-UP
 
@@ -114,3 +114,47 @@ Install the theme config menu `luci-app-argon-config` to be able to configure th
 wget --no-check-certificate https://github.com/jerrykuku/luci-app-argon-config/releases/download/v0.9/luci-app-argon-config_0.9_all.ipk -O luci-app-argon-config_0.9_all.ipk
 opkg install luci-app-argon-config*.ipk
 ```
+
+## Cooling & FAN
+
+Hint to get it working:
+
+`echo 70000 > trip_point_2_temp`
+
+[OpenWrt GitHub Issue - PWM Fan](https://github.com/openwrt/openwrt/issues/13772)
+
+## CPU and Temp Extension
+
+[luci-app-cpu-status-mini](https://github.com/gSpotx2f/luci-app-cpu-status-mini)
+
+```sh
+wget --no-check-certificate -O /tmp/luci-app-cpu-status-mini_0.1-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-cpu-status-mini_0.1-5_all.ipk
+opkg install /tmp/luci-app-cpu-status-mini_0.1-5_all.ipk
+rm /tmp/luci-app-cpu-status-mini_0.1-5_all.ipk
+/etc/init.d/rpcd reload
+```
+
+[luci-app-temp-status](https://github.com/gSpotx2f/luci-app-temp-status)
+
+```sh
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
+opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
+rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+/etc/init.d/rpcd reload
+```
+
+## Custom Build
+
+[OpenWrt Firmware-Selector - BananaPiR3](https://firmware-selector.openwrt.org/?version=23.05.2&target=mediatek%2Ffilogic&id=bananapi_bpi-r3)
+
+```
+base-files busybox ca-bundle dnsmasq dropbear e2fsprogs f2fsck firewall4 fstools kmod-crypto-hw-safexcel kmod-gpio-button-hotplug kmod-hwmon-pwmfan kmod-i2c-gpio kmod-leds-gpio kmod-mt7915e kmod-mt7986-firmware kmod-nft-offload kmod-sfp kmod-usb3 libc libgcc libustream-mbedtls logd luci mkf2fs mt7986-wo-firmware mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe procd procd-seccomp procd-ujail uboot-envtools uci uclient-fetch urandom-seed urngd terminfo cfdisk resize2fs parted losetup fdisk block-mount luci-lib-ipkg luci-compat curl luci-theme-openwrt-2020 libopenssl3 ttyd luci-app-ttyd dbus samba4-server luci-app-samba4 luci-app-commands hostapd-utils btop luci-mod-dashboard wifischedule luci-app-wifischedule luci-app-ntpc zsh bottom wpad-mbedtls
+```
+
+`wpad-mbedtls` enables WPS features
+
+Pagage `luci-app-commands` helps to start WPS with added command `hostapd_cli wps_pbc` in UI --> makes it available in UI
+
+### Optionals
+
+`luci-app-sqm` for traffic shaping and limitations.
