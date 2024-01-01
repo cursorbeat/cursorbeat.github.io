@@ -26,7 +26,7 @@ const Footer = ({ path }) => {
         relativePath: { eq: "tech-icons/styled-components.png" }
       ) {
         childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, placeholder: TRACED_SVG)
+          gatsbyImageData(layout: CONSTRAINED, placeholder: DOMINANT_COLOR)
         }
       }
     }

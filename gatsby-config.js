@@ -21,6 +21,8 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 800,
+              backgroundColor: `transparent`,
+              quality: 100,
             },
           },
           {
@@ -72,7 +74,15 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
-    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-remark-images`,
+      options: {
+        maxWidth: 800,
+        backgroundColor: `transparent`,
+        backgroundColor: `transparent`,
+        quality: 100,
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

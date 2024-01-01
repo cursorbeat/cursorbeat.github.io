@@ -1,5 +1,5 @@
 ---
-slug:'MacKeyboardTypeFix'
+slug: 'MacKeyboardTypeFix'
 title: 'macOS - External Keyboard keys are swapped (solved)'
 subtitle: 'Sometimes macOS could be painful..'
 image: 'KeyboardTypeError.png'
@@ -21,7 +21,7 @@ type: 'blogPost'
 - `<` Key (right of SHIFT)
 - `^` Key (left of 1)
 
-This is because macOS set the wrong keyboard type (ISO, ANSI, JIS, ..) even if the wizzard shows the right result.
+This is because macOS set the wrong keyboard type (ISO, ANSI, JIS, ..) even if the config wizard shows the right result.
 
 ### On QMK based keyboards:
 
@@ -34,7 +34,7 @@ This is because macOS set the wrong keyboard type (ISO, ANSI, JIS, ..) even if t
 
 ### macOS default settings
 
-	System Settings --> Keyboard --> Change Keyboard Type --> go through the Wizzard --> Done.
+	System Settings --> Keyboard --> Change Keyboard Type --> go through the Wizard --> Done.
 
 But for me and a lot of others with external keyboards not from Apple this won't work. In the past I fixed this issue with [Karabiner-Elements](https://karabiner-elements.pqrs.org) , but this is more like a [workaround](https://apple.stackexchange.com/questions/227294/change-mac-keyboard-identifier-after-keyboard-replacement) as a proper fix. A further option would be to remap the keyboard key's on QMK or VIA Keyboards, but this is crazy and won't work in combination with other operating systems. 
 
