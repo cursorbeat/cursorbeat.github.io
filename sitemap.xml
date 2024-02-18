@@ -5,6 +5,7 @@
 <url> <loc>https://blog.cursorbeat.dev/blog/PowerShell-Config-for-Developers</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.cursorbeat.dev/blog/Tilix-and-Zsh-on-Windows10</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.cursorbeat.dev/blog/first-cursorbeat-blog-launch</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://blog.cursorbeat.dev/tutorials/CustomFiberHardware</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.cursorbeat.dev/tutorials/OpenWrt</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.cursorbeat.dev/about/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://blog.cursorbeat.dev/blog/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
