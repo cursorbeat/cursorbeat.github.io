@@ -137,24 +137,38 @@ rm /tmp/luci-app-cpu-status-mini_0.1-5_all.ipk
 [luci-app-temp-status](https://github.com/gSpotx2f/luci-app-temp-status)
 
 ```sh
-wget --no-check-certificate -O /tmp/luci-app-temp-status_0.3-5_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.3-5_all.ipk
-opkg install /tmp/luci-app-temp-status_0.3-5_all.ipk
-rm /tmp/luci-app-temp-status_0.3-5_all.ipk
+wget --no-check-certificate -O /tmp/luci-app-temp-status_0.4-2_all.ipk https://github.com/gSpotx2f/packages-openwrt/raw/master/current/luci-app-temp-status_0.4-2_all.ipk
+opkg install /tmp/luci-app-temp-status_0.4-2_all.ipk
+rm /tmp/luci-app-temp-status_0.4-2_all.ipk
 /etc/init.d/rpcd reload
 ```
+Both Luci plugins are shown on the Dashboard.
 
 ## Custom Build
 
 [OpenWrt Firmware-Selector - BananaPiR3](https://firmware-selector.openwrt.org/?version=23.05.2&target=mediatek%2Ffilogic&id=bananapi_bpi-r3)
 
-```
-base-files busybox ca-bundle dnsmasq dropbear e2fsprogs f2fsck firewall4 fstools kmod-crypto-hw-safexcel kmod-gpio-button-hotplug kmod-hwmon-pwmfan kmod-i2c-gpio kmod-leds-gpio kmod-mt7915e kmod-mt7986-firmware kmod-nft-offload kmod-sfp kmod-usb3 libc libgcc libustream-mbedtls logd luci mkf2fs mt7986-wo-firmware mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe procd procd-seccomp procd-ujail uboot-envtools uci uclient-fetch urandom-seed urngd terminfo cfdisk resize2fs parted losetup fdisk block-mount luci-lib-ipkg luci-compat curl luci-theme-openwrt-2020 libopenssl3 ttyd luci-app-ttyd dbus samba4-server luci-app-samba4 luci-app-commands hostapd-utils btop luci-mod-dashboard wifischedule luci-app-wifischedule luci-app-ntpc zsh bottom wpad-mbedtls
-```
+`
+base-files busybox ca-bundle dnsmasq dropbear e2fsprogs f2fsck firewall4 fstools kmod-crypto-hw-safexcel kmod-gpio-button-hotplug kmod-hwmon-pwmfan kmod-i2c-gpio kmod-leds-gpio kmod-mt7915e kmod-mt7986-firmware kmod-nft-offload kmod-sfp kmod-usb3 libc libgcc libustream-mbedtls logd luci mkf2fs mt7986-wo-firmware mtd netifd nftables odhcp6c odhcpd-ipv6only opkg ppp ppp-mod-pppoe procd procd-seccomp procd-ujail uboot-envtools uci uclient-fetch urandom-seed urngd terminfo cfdisk resize2fs parted losetup fdisk block-mount luci-lib-ipkg luci-compat curl luci-theme-openwrt-2020 libopenssl3 ttyd luci-app-ttyd dbus samba4-server luci-app-samba4 luci-app-commands hostapd-utils btop luci-mod-dashboard wifischedule luci-app-wifischedule ntpd zsh bottom wpad-mbedtls luci-ssl openssl-util luci-theme-material atftp luci-app-advancedsetting luci-app-statistics luci-app-wol
+`
 
-`wpad-mbedtls` enables WPS features
-
-Pagage `luci-app-commands` helps to start WPS with added command `hostapd_cli wps_pbc` in UI --> makes it available in UI
+- Note:`wpad-mbedtls` enables WPS features
+- Note: Package `luci-app-commands` helps to start WPS with added command `hostapd_cli wps_pbc` in UI --> makes it available in UI
+- Note: `luci-app-ntpc` got removed in v23.05.2 instead `ntpd` is used but has atm no UI to configure NTP 
 
 ### Optionals
 
-`luci-app-sqm` for traffic shaping and limitations.
+- Add: `luci-app-sqm` for traffic shaping and limitations.
+- Add: `luci-app-dawn` for DAWN support which extends 802.11r /k/v support.
+
+#### Web Terminal SSL support
+
+`luci-app-ttyd` requires to enable SSL in UI config and a cert and key no ca.
+But `luci-ssl` certs require to get converted and linked:
+
+```sh
+openssl x509 -inform der -in /etc/uhttpd.crt -out /etc/ttyd.crt
+openssl ec -inform der -in /etc/uhttpd.key  -out /etc/ttyd.key
+```
+
+* (slightly updated 28.03.2024)
